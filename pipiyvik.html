@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruticaja</title>
+  <style>
+    /* Mantenemos todos los estilos originales */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    body {
+      background-image: url('https://i.pinimg.com/originals/90/9e/25/909e25893881b145777c4c02b69a788a.gif');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Comic Neue', cursive;
+      color: #ff99cc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+      max-width: 400px;
+      width: 85%;
+      border: 2px solid #ffb3d9;
+      backdrop-filter: blur(3px);
+    }
+
+    img {
+      max-width: 180px;
+      margin: 0 auto 15px;
+      display: block;
+      animation: suave 2s ease-in-out infinite;
+    }
+
+    @keyframes suave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    input {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1.5px solid #ffb3d9;
+      border-radius: 12px;
+      background: #fff9fb;
+      color: #ff66b2;
+      width: 70%;
+      margin: 8px 0;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #ffb3d9;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 17px;
+      background: #ffb3d9;
+      color: #ffffff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin: 10px 0;
+    }
+
+    button:hover {
+      background: #ff99cc;
+      transform: scale(1.02);
+    }
+
+    .resultado {
+      margin-top: 15px;
+      font-size: 22px;
+      color: #ff66b2;
+      font-weight: 500;
+    }
+
+    #aclaracion {
+      font-size: 14px;
+      color: #ff99cc;
+      margin-top: 10px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <img src="https://i.pinimg.com/736x/3b/a6/e4/3ba6e438dd42ac559138a995e98e5806.jpg" alt="fruticaja">
+    
+    <p>¡Cotizador Fruticaja! (ᵔ◡ᵔ)</p>
+    <input type="number" id="usd" placeholder="Ej: 10.50" step="0.01">
+    <button onclick="calcular()">Calcular :3</button>
+
+    <div class="resultado" id="resultado"></div>
+    <p id="aclaracion"></p>
+  </div>
+
+  <script>
+    function calcular() {
+      const dolar = 1300;
+      const fee = 2.30;
+      
+      // Capturamos el valor y convertimos correctamente
+      const inputValue = document.getElementById("usd").value.replace(',', '.');
+      const inputUSD = parseFloat(inputValue);
+
+      if (isNaN(inputUSD)) {
+        document.getElementById("resultado").innerHTML = "Número inválido (´･ω･`)";
+        document.getElementById("aclaracion").innerHTML = "";
+        return;
+      }
+
+      const totalARS = (inputUSD + fee) * dolar;
+      
+      // Formateamos el resultado como moneda
+      document.getElementById("resultado").innerHTML = 
+        `ฅ^•ﻌ•^ฅ ${totalARS.toLocaleString('es-AR', {
+          style: 'currency',
+          currency: 'ARS',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })}`;
+      
+      document.getElementById("aclaracion").innerHTML = 
+        "Precio final con todo incluido~ 7w7";
+    }
+
+    // Cargamos el focus en el input al inicio
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById("usd").focus();
+      const disclaimer = document.querySelector("img[alt='www.000webhost.com']");
+      if(disclaimer) disclaimer.remove();
+    });
+  </script>
+</body>
+</html>
